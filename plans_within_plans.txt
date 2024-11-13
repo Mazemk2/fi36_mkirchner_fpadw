@@ -1,0 +1,41 @@
+┌───────────────────────┐          ┌───────────────────────┐          ┌───────────────────────┐
+│      Mitarbeiter      │          │       Bestellung      │          │       Rechnung        │
+├───────────────────────┤          ├───────────────────────┤          ├───────────────────────┤
+│ mitarbeiter_id (PK)   │◄─────────┤ bestellung_id (PK)    │          │ rechnung_id (PK)      │
+│ name                  │          │ mitarbeiter_id (FK)   │──────────┤ bestellung_id (FK)    │
+│ abteilung             │          │ datum                 │          │ datum                 │
+└───────────────────────┘          └───────────────────────┘          │ gesamtpreis           │
+                                                                       └───────────────────────┘
+
+                                       │
+                                       │ 1:N
+                                       │
+                                       ▼
+
+                         ┌────────────────────────────────┐
+                         │      Bestellung_Produkt        │
+                         ├────────────────────────────────┤
+                         │ bestellung_produkt_id (PK)     │
+                         │ bestellung_id (FK)             │
+                         │ produkt_id (FK)                │
+                         │ menge                          │
+                         │ einzelpreis                    │
+                         └────────────────────────────────┘
+
+                                       ▲
+                                       │ N:1
+                                       │
+                                       │
+                                       │
+                                       ▼
+ 
+                           ┌───────────────────────┐
+                           │       Produkt         │
+                           ├───────────────────────┤
+                           │ produkt_id (PK)       │
+                           │ titel                 │
+                           │ beschreibung          │
+                           │ preis                 │
+                           │ bestand               │
+                           │ bild                  │
+                           └───────────────────────┘

@@ -1,0 +1,73 @@
+-- Tabelle für Mitarbeiterdaten
+CREATE TABLE Mitarbeiter (
+  mitarbeiter_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  abteilung TEXT
+);
+
+-- Tabelle für Produktinformationen
+CREATE TABLE Produkt (
+  produkt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titel TEXT NOT NULL,
+  beschreibung TEXT,
+  preis REAL NOT NULL,
+  bestand INTEGER NOT NULL DEFAULT 0,
+  bild TEXT
+);
+
+-- Tabelle für Bestellungen
+CREATE TABLE Bestellung (
+  bestellung_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  mitarbeiter_id INTEGER NOT NULL,
+  datum DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (mitarbeiter_id) REFERENCES Mitarbeiter(mitarbeiter_id)
+);
+
+-- Zwischentabelle für Bestellpositionen (ein Produkt pro Bestellung)
+CREATE TABLE Bestellung_Produkt (
+  bestellung_produkt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  bestellung_id INTEGER NOT NULL,
+  produkt_id INTEGER NOT NULL,
+  menge INTEGER NOT NULL,
+  einzelpreis REAL NOT NULL,
+  FOREIGN KEY (bestellung_id) REFERENCES Bestellung(bestellung_id),
+  FOREIGN KEY (produkt_id) REFERENCES Produkt(produkt_id)
+);
+
+-- Tabelle für Rechnungen, die den aktuellen Bestand nach Bestellung darstellt
+CREATE TABLE Rechnung (
+  rechnung_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  bestellung_id INTEGER NOT NULL,
+  datum DATETIME DEFAULT CURRENT_TIMESTAMP,
+  gesamtpreis REAL NOT NULL,
+  FOREIGN KEY (bestellung_id) REFERENCES Bestellung(bestellung_id)
+);
+
+
+-- Beispiel: Mitarbeiter und Produkte hinzufügen
+INSERT INTO Mitarbeiter (name, abteilung) VALUES ('Max Mustermann', 'Verkauf'), ('Anna Meier', 'Marketing');
+INSERT INTO Produkt (titel, beschreibung, preis, bestand, bild) VALUES
+('Bürostuhl', 'Ergonomischer Stuhl mit Lendenstütze', 149.00, 10, '/bilder/stuhl.jpg'),
+('Laptop', '15-Zoll Laptop mit 16GB RAM', 999.99, 5, '/bilder/laptop.jpg');
+
+-- Neue Bestellung hinzufügen
+INSERT INTO Bestellung (mitarbeiter_id) VALUES (1);
+
+-- Produkte zur Bestellung hinzufügen (Bestellung_ID = 1)
+INSERT INTO Bestellung_Produkt (bestellung_id, produkt_id, menge, einzelpreis) VALUES
+(1, 1, 1, 149.00),  -- 1x Bürostuhl
+(1, 2, 2, 999.99);  -- 2x Laptop
+
+-- Erstellung einer Rechnung für Bestellung 1 und Bestandsanpassung
+-- Schritt 1: Gesamtpreis berechnen
+INSERT INTO Rechnung (bestellung_id, gesamtpreis)
+SELECT bestellung_id, SUM(menge * einzelpreis) AS gesamtpreis
+FROM Bestellung_Produkt
+WHERE bestellung_id = 1;
+
+-- Schritt 2: Produktbestand aktualisieren
+UPDATE Produkt
+SET bestand = bestand - (
+    SELECT menge FROM Bestellung_Produkt WHERE Bestellung_Produkt.produkt_id = Produkt.produkt_id AND bestellung_id = 1
+)
+WHERE produkt_id IN (SELECT produkt_id FROM Bestellung_Produkt WHERE bestellung_id = 1);

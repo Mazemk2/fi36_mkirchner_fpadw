@@ -1,0 +1,24 @@
+-- SQLite-Version der Produkt-Tabelle mit Beispieldaten
+
+-- Vorhandene Tabelle löschen
+DROP TABLE IF EXISTS produkt;
+
+-- Produkt-Tabelle erstellen
+CREATE TABLE produkt (
+  produkt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titel TEXT NOT NULL,
+  beschreibung TEXT NOT NULL,
+  preis REAL NOT NULL,
+  bild TEXT
+);
+
+-- Beispieldaten in die Produkt-Tabelle einfügen
+INSERT INTO produkt (titel, beschreibung, preis, bild) VALUES
+('Umweltfreundlicher Bambus-Stift', 'Ein nachhaltiger, umweltfreundlicher Bambus-Stift – ideal für umweltbewusste Kunden.', 3.99, '/produkt-bilder/bambus-stift.jpg'),
+('Kabellose Noise-Cancelling-Kopfhörer', 'Erleben Sie immersiven Sound mit diesen hochwertigen, kabellosen Noise-Cancelling-Kopfhörern.', 99.99, '/produkt-bilder/noise-cancelling-kopfhoerer.jpg'),
+('Intelligente LED-Schreibtischlampe', 'Moderne LED-Schreibtischlampe mit einstellbarer Helligkeit und Farbtemperatur.', 49.95, '/produkt-bilder/led-lampe.jpg'),
+('Kompakter Reise-Rucksack', 'Ein leichter, wasserabweisender Rucksack, ideal für Reisen und den täglichen Gebrauch.', 39.50, '/produkt-bilder/reise-rucksack.jpg'),
+('Tragbarer Espresso-Maker', 'Bereiten Sie hochwertigen Espresso auch unterwegs mit diesem kompakten, tragbaren Espresso-Maker zu.', 64.95, '/produkt-bilder/espresso-maker.jpg'),
+('Ergonomischer Bürostuhl', 'Komfort trifft auf Stil in diesem ergonomischen Bürostuhl mit Lendenwirbelstütze und verstellbaren Armlehnen.', 149.00, '/produkt-bilder/buerostuhl.jpg'),
+('Smartphone-Gimbal-Stabilisator', 'Erstellen Sie professionelle Videos mit diesem 3-Achsen-Smartphone-Gimbal.', 89.00, '/produkt-bilder/gimbal.jpg'),
+('Umweltfreundliche Isolierflasche', 'Hält Getränke dank doppelwandigem Edelstahl heiß oder kalt.', 22.95, '/produkt-bilder/isolierflasche.jpg');
