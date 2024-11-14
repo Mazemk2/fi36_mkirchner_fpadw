@@ -3,6 +3,8 @@ CREATE TABLE Mitarbeiter (
   mitarbeiter_id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   abteilung TEXT
+  e-mail VCHAR NOT NULL
+  hash VCHAR NOT NULL
 );
 
 -- Tabelle für Produktinformationen
