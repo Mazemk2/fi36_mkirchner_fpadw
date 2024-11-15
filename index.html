@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-Page-Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #101fc0;
+            padding: 20px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #101fdd;
+        }
+
+        nav a {
+            padding: 14px 20px;
+            color: #fdcbcb;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        section {
+            display: none;
+            padding: 20px;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Willkommen auf meiner Dummy-One-Page-Seite</h1>
+</header>
+
+<nav>
+    <a href="#" onclick="showSection('home')">Startseite</a>
+    <a href="#" onclick="showSection('about')">Über uns</a>
+    <a href="#" onclick="showSection('services')">Leistungen</a>
+    <a href="#" onclick="showSection('contact')">Kontakt</a>
+</nav>
+
+<main>
+    <section id="home" class="active">
+        <h2>Startseite</h2>
+        <p>Das ist der Inhalt der Startseite.</p>
+    </section>
+
+    <section id="about">
+        <h2>Über uns</h2>
+        <p>Hier erfährst du mehr über uns und unser Unternehmen.</p>
+    </section>
+
+    <section id="services">
+        <h2>Leistungen</h2>
+        <p>Hier findest du Informationen zu unseren Dienstleistungen.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <p>Kontaktiere uns über diese Seite.</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 M@ze beim basteln</p>
+</footer>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+
+        document.getElementById(sectionId).classList.add('active');
+    }
+</script>
+
+</body>
+</html>

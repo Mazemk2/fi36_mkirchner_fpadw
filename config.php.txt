@@ -1,0 +1,9 @@
+<?php
+
+$host = '172.30.148.126';
+$db = 'name_of_your_database';
+$user = 'Matze';
+$pass = 'Ap05ta+a';
+$charset = 'utf8mb4';
+
+?>
