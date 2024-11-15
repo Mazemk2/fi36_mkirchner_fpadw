@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Datenbank Onepager</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Datenbankübersicht</h1>
+
+  <!-- Mitarbeiterdaten -->
+  <section>
+    <h2>Mitarbeiter</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Abteilung</th>
+      </tr>
+      <% mitarbeiter.forEach(m => { %>
+        <tr>
+          <td><%= m.mitarbeiter_id %></td>
+          <td><%= m.name %></td>
+          <td><%= m.abteilung %></td>
+        </tr>
+      <% }) %>
+    </table>
+  </section>
+
+  <!-- Produktdaten -->
+  <section>
+    <h2>Produkte</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Titel</th>
+        <th>Beschreibung</th>
+        <th>Preis</th>
+        <th>Bestand</th>
+        <th>Bild</th>
+      </tr>
+      <% produkte.forEach(p => { %>
+        <tr>
+          <td><%= p.produkt_id %></td>
+          <td><%= p.titel %></td>
+          <td><%= p.beschreibung %></td>
+          <td><%= p.preis %> €</td>
+          <td><%= p.bestand %></td>
+          <td><img src="<%= p.bild %>" alt="<%= p.titel %> Bild" width="50"></td>
+        </tr>
+      <% }) %>
+    </table>
+  </section>
+
+  <!-- Bestelldaten -->
+  <section>
+    <h2>Bestellungen</h2>
+    <table>
+      <tr>
+        <th>Bestellung-ID</th>
+        <th>Mitarbeiter</th>
+        <th>Datum</th>
+        <th>Produkt</th>
+        <th>Menge</th>
+        <th>Einzelpreis</th>
+      </tr>
+      <% bestellungen.forEach(b => { %>
+        <tr>
+          <td><%= b.bestellung_id %></td>
+          <td><%= b.mitarbeiter_name %></td>
+          <td><%= b.datum %></td>
+          <td><%= b.titel %></td>
+          <td><%= b.menge %></td>
+          <td><%= b.einzelpreis %> €</td>
+        </tr>
+      <% }) %>
+    </table>
+  </section>
+</body>
+</html>
