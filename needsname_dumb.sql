@@ -1,8 +1,15 @@
--- Tabelle: Mitarbeiter
+--Zwischentabelle Users for Authentification
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('user', 'admin') DEFAULT 'user'
+);
+-- Zwischentabelle Mitarbeiter
 CREATE TABLE Mitarbeiter (
-  mitarbeiter_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  abteilung VARCHAR(50)
+    mitarbeiter_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    abteilung VARCHAR(255)
 );
 
 -- Tabelle: Produkt

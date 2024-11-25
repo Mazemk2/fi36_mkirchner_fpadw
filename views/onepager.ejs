@@ -12,18 +12,22 @@
   <section>
     <h2>Mitarbeiter</h2>
     <table>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Abteilung</th>
-      </tr>
-      <% mitarbeiter.forEach(m => { %>
+      <thead>
         <tr>
-          <td><%= m.mitarbeiter_id %></td>
-          <td><%= m.name %></td>
-          <td><%= m.abteilung %></td>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Abteilung</th>
         </tr>
-      <% }) %>
+      </thead>
+      <tbody>
+        <% mitarbeiter.forEach(m => { %>
+          <tr>
+            <td><%= m.mitarbeiter_id %></td>
+            <td><%= m.name %></td>
+            <td><%= m.abteilung %></td>
+          </tr>
+        <% }) %>
+      </tbody>
     </table>
   </section>
 
@@ -31,24 +35,28 @@
   <section>
     <h2>Produkte</h2>
     <table>
-      <tr>
-        <th>ID</th>
-        <th>Titel</th>
-        <th>Beschreibung</th>
-        <th>Preis</th>
-        <th>Bestand</th>
-        <th>Bild</th>
-      </tr>
-      <% produkte.forEach(p => { %>
+      <thead>
         <tr>
-          <td><%= p.produkt_id %></td>
-          <td><%= p.titel %></td>
-          <td><%= p.beschreibung %></td>
-          <td><%= p.preis %> €</td>
-          <td><%= p.bestand %></td>
-          <td><img src="<%= p.bild %>" alt="<%= p.titel %> Bild" width="50"></td>
+          <th>ID</th>
+          <th>Titel</th>
+          <th>Beschreibung</th>
+          <th>Preis</th>
+          <th>Bestand</th>
+          <th>Bild</th>
         </tr>
-      <% }) %>
+      </thead>
+      <tbody>
+        <% produkte.forEach(p => { %>
+          <tr>
+            <td><%= p.produkt_id %></td>
+            <td><%= p.titel %></td>
+            <td><%= p.beschreibung %></td>
+            <td><%= p.preis %> €</td>
+            <td><%= p.bestand %></td>
+            <td><img src="<%= p.bild %>" alt="<%= p.titel %> Bild" width="50"></td>
+          </tr>
+        <% }) %>
+      </tbody>
     </table>
   </section>
 
@@ -56,24 +64,28 @@
   <section>
     <h2>Bestellungen</h2>
     <table>
-      <tr>
-        <th>Bestellung-ID</th>
-        <th>Mitarbeiter</th>
-        <th>Datum</th>
-        <th>Produkt</th>
-        <th>Menge</th>
-        <th>Einzelpreis</th>
-      </tr>
-      <% bestellungen.forEach(b => { %>
+      <thead>
         <tr>
-          <td><%= b.bestellung_id %></td>
-          <td><%= b.mitarbeiter_name %></td>
-          <td><%= b.datum %></td>
-          <td><%= b.titel %></td>
-          <td><%= b.menge %></td>
-          <td><%= b.einzelpreis %> €</td>
+          <th>Bestellung-ID</th>
+          <th>Mitarbeiter</th>
+          <th>Datum</th>
+          <th>Produkt</th>
+          <th>Menge</th>
+          <th>Einzelpreis</th>
         </tr>
-      <% }) %>
+      </thead>
+      <tbody>
+        <% bestellungen.forEach(b => { %>
+          <tr>
+            <td><%= b.bestellung_id %></td>
+            <td><%= b.mitarbeiter_name %></td>
+            <td><%= b.datum %></td>
+            <td><%= b.titel %></td>
+            <td><%= b.menge %></td>
+            <td><%= b.einzelpreis %> €</td>
+          </tr>
+        <% }) %>
+      </tbody>
     </table>
   </section>
 </body>

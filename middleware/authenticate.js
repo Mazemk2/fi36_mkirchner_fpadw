@@ -1,17 +1,21 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'dein_secret_key';
+require('dotenv').config();
 
 function authenticateToken(req, res, next) {
-    const token = req.headers['authorization'];
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];  // "Bearer token"
 
-    if (!token) return res.status(401).json({ message: 'Token fehlt' });
+  if (!token) {
+    return res.status(401).json({ message: 'Yepp thats a cow, alright!' });
+  }
 
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.status(403).json({ message: 'Token ist ungültig' });
-
-        req.user = user; // Benutzerinformationen zur Anfrage hinzufügen
-        next();
-    });
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Ungültiges Token' });
+    }
+    req.user = user;  // Benutzer-Info im Request speichern
+    next();
+  });
 }
 
 module.exports = authenticateToken;

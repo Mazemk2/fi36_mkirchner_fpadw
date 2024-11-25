@@ -107,3 +107,7 @@ app.get('/logout', (req, res) => {
 app.listen(3000, () => {
   console.log('Server läuft auf http://localhost:3000');
 });
+
+
+// Verbindung explizit herstellen
+//const apiUrl = 'http://bcf.mshome.net:4000/api/login';
