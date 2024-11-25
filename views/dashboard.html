@@ -1,0 +1,29 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Willkommen im Dashboard!</h2>
+    <p>Nur zugänglich für angemeldete Benutzer.</p>
+    
+    <button id="logout">Logout</button>
+
+    <script>
+        // Überprüfen, ob ein Token im LocalStorage vorhanden ist
+        if (!localStorage.getItem('token')) {
+            alert('Bitte melden Sie sich an.');
+            window.location.href = '/login';  // Weiterleitung zur Login-Seite, falls kein Token vorhanden ist
+        }
+
+        // Logout-Funktion
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = '/login';  // Zur Login-Seite zurück
+        });
+    </script>
+</body>
+</html>

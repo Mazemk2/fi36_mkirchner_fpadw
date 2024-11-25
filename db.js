@@ -12,3 +12,4 @@ const db = mysql.createPool({
 });
 
 module.exports = db;  // Exportiere das Pool-Objekt
+

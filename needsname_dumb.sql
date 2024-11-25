@@ -76,3 +76,6 @@ INSERT INTO Bestellung_Produkt (bestellung_id, produkt_id, menge, einzelpreis) V
 (2, 2, 1, 999.99),  -- Bestellung 2: 1x Laptop
 (2, 4, 1, 89.99);   -- Bestellung 2: 1x Tastatur
 
+INSERT INTO users (id, email, password_hash, role) Values
+(Matthew, admin@firma.com, dein_geheimer_jwt_key, admin);
+

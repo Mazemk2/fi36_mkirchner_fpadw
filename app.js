@@ -3,22 +3,27 @@ const jwt = require('jsonwebtoken');
 const db = require('./db');
 const authRoutes = require('./routes/auth');
 const authenticate = require('./middleware/authenticate');
-require('dotenv').config();  // Lade die .env-Datei
+require('dotenv').config();  // Lade Umgebungsvariablen
 
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.static('public'));
 
-// Authentifizierungsrouten
-app.use('/auth', authRoutes);  // Login-Routen, die öffentlich sind, keine Authentifizierung erforderlich
+// **Öffentliche Route für Login-Seite**
+app.get('/login', (req, res) => {
+  res.render('login');  // Login-Seite anzeigen, keine Authentifizierung erforderlich
+});
 
-// Routen, die geschützt sind (erfordern ein Token)
+// **Auth-Routen für Login und Logout**
+app.use('/auth', authRoutes);
+
+// **Geschützte Route für das Dashboard**
 app.get('/dashboard', authenticate, (req, res) => {
   res.send('Willkommen im geschützten Bereich!');
 });
 
-// Route für Onepager (Daten anzeigen) - geschützt
+// **Onepager (Daten anzeigen) - Geschützt**
 app.get('/', authenticate, (req, res) => {
   const queries = {
     mitarbeiter: 'SELECT * FROM Mitarbeiter',
@@ -45,11 +50,6 @@ app.get('/', authenticate, (req, res) => {
     res.status(500).send('Fehler beim Abrufen der Daten');
     console.error(err);
   });
-});
-
-// Public route (login.html)
-app.get('/login', (req, res) => {
-  res.render('login');
 });
 
 // Server starten
